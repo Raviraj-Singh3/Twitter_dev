@@ -1,6 +1,7 @@
 const express =  require('express')
 const connect = require('./config/database')
-const Tweet = require('./models/tweet')
+const TweetService = require('./services/tweet-service')
+const HashtagRepository = require('./repository/hashtag-repository')
 const app = express();
 
 app.listen(3000, async() => {
@@ -8,9 +9,23 @@ app.listen(3000, async() => {
     await connect();
     console.log("database connected");
 
-    const tweet = await Tweet.create({
-         content: 'hey'
-        
+    // const repo = new HashtagRepository();
+    // const hashtag = await repo.bulkCreate([
+    //     {
+    //     title: "cool"
+    //     },
+    //     {
+    //     title: "sunday"
+    //     },
+    //     {
+    //     title: "excited"
+    //     }
+    // ])
+    // console.log(hashtag)
+
+    const repo = new TweetService();
+    const tweet = await repo.create({
+        content: "today, hey there I am #excited #cool #2023, #newYear",
     })
     console.log(tweet)
 })
