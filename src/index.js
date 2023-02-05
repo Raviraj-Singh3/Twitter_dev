@@ -1,32 +1,22 @@
-import  express  from 'express';
-// const connect = require('./config/database')
+import  express from 'express';
 import connect from './config/database.js'
-// const TweetService = require('./services/tweet-service')
-// const HashtagRepository = require('./repository/hashtag-repository')
-const app = express();
+import bodyParser from 'body-parser';
+import apiRoutes from './routes/index.js';
 
-app.listen(3000, async() => {
+//const setupAndStartServer = async()=>{
+
+    const app = express();
+
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({extended: true}));
+   
+
+    app.use('/api', apiRoutes);
+
+    app.listen(3000, async() => {
     console.log("server started");
     await connect();
     console.log("database connected");
-
-    // const repo = new HashtagRepository();
-    // const hashtag = await repo.bulkCreate([
-    //     {
-    //     title: "cool"
-    //     },
-    //     {
-    //     title: "sunday"
-    //     },
-    //     {
-    //     title: "excited"
-    //     }
-    // ])
-    // console.log(hashtag)
-
-    // const repo = new TweetService();
-    // const tweet = await repo.create({
-    //     content: "today, hey there I am #excited #cool #2023, #newYear",
-    // })
-    // console.log(tweet)
 })
+//}
+//setupAndStartServer();
