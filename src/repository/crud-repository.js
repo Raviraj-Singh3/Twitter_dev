@@ -7,7 +7,6 @@ class crudRepository {
 
     async create(data) {
         try {
-            console.log("crud repo",data);
             const result = await this.model.create(data);
             return result;
         } catch (error) {

@@ -19,7 +19,7 @@ import LikeService from './services/like-service.js'
 
     app.use('/api', apiRoutes);
 
-    app.listen(3009, async() => {
+    app.listen(3000, async() => {
     console.log("server started");
     await connect();
     console.log("database connected");
